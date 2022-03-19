@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>글쓰기</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -11,14 +15,15 @@
         <form th:method="post" th:action="@{/board}">
             <div>
                 <label>제목</label>
-                <input placeholder="제목을 입력하세요" th:name="title">
+                <input placeholder="제목을 입력하세요" th:name="title" id="title">
             </div>
             <div>
                 <label>내용</label>
-                <textarea placeholder="내용을 입력하세요" th:name="content"></textarea>
+                <textarea placeholder="내용을 입력하세요" th:name="content" id="content"></textarea>
             </div>
-            <input type="submit" value="작성완료">
         </form>
+        <button id="btn-save" class="btn-primary">작성완료</button>
     </div>
+    <script src="/js/board.js"></script>
 </body>
 </html>

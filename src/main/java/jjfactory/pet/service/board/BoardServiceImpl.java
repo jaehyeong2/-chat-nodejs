@@ -1,6 +1,7 @@
 package jjfactory.pet.service.board;
 
 import jjfactory.pet.domain.board.Board;
+import jjfactory.pet.domain.user.User;
 import jjfactory.pet.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +33,16 @@ public class BoardServiceImpl implements BoardService {
 
     @Transactional
     @Override
-    public void save(Board board){
-        boardRepository.save(board);
+    public Board save(Board board, User user){
+        board.setSessionId(user);
+        Board saveBoard = boardRepository.save(board);
+        return saveBoard;
     }
 
     @Transactional
     @Override
     public void delete(Long id){
+        log.info("글 삭제 board_id:{}",id);
         boardRepository.deleteById(id);
     }
 }

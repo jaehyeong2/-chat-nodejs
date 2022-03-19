@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -10,14 +14,51 @@
         <h3>글</h3>
         <form th:object="${board}">
             <div>
+                글번호 : <span id="id"><i th:text="${board.id}"></i></span>
                 <div th:text="${board.title}"/>
             </div>
             <div>
                 <textarea th:text="${board.content}"/>
             </div>
         </form>
+<!--        <div th:if="${board.user.id == principal.user.id}">-->
+            <a href="/board/${board.id}" class="btn btn-warning">수정</a>
+            <button id="btn-delete" class="btn btn-danger">삭제</button>
+<!--        </div>-->
+<!--        <a th:href="@{/board/{id}(id=${category.id})}" class="btn btn-danger">삭제하기-->
+
+        <div class="card">
+            <form>
+                <input type="hidden" id="userId" th:value="${principal.id}" />
+                <input type="hidden" id="boardId" th:value="${board.id}" />
+                <div class="card-body">
+                    <textarea id="comment-content" class="form-control" rows="1"></textarea>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="btn-comment-save" class="btn btn-primary">등록</button>
+                </div>
+            </form>
+        </div>
 
 
+        <div class="card">
+            <div class="card-header">댓글 리스트</div>
+            <ul id="comment-box" class="list-group">
+                <tr th:each="comment, iStat : ${comments}">
+                    <li id="comment-${comment.id}" class="list-group-item d-flex justify-content-between">
+                        <div th:text="${comment.content}" />
+                        <div class="d-flex">
+                            <div class="font-italic" th:text="${comment.user.username}"></div>
+<!--                            <div th:if="${comment.user.id eq principal.user.id}">-->
+<!--                                <button onClick="index.commentDelete(${board.id}, ${comment.id})" class="badge">삭제</button>-->
+<!--                            </div>-->
+                        </div>
+                    </li>
+
+                </tr>
+            </ul>
+        </div>
     </div>
+    <script src="/js/board.js"></script>
 </body>
 </html>

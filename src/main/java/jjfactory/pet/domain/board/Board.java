@@ -1,5 +1,6 @@
 package jjfactory.pet.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jjfactory.pet.domain.BaseTimeEntity;
 import jjfactory.pet.domain.user.User;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Board extends BaseTimeEntity {
     @Lob
     private String content;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

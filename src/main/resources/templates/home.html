@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,7 +10,12 @@
 <div>
     <div>
         <a href="/signup">회원가입</a>
-        <a href="/signin">료그인</a>
+        <li class="nav-item active">
+            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signin}" href="#">로그인</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">로그아웃</a>
+        </li>
     </div>
     <div>
         <a href="/board">글쓰기</a>
@@ -27,7 +33,7 @@
         <tbody>
 
         <tr th:each="board, iStat : ${boards}">
-            <th scope="row" th:text="${iStat.index + 1}"></th>
+            <th scope="row" th:text="${iStat.index}"+1></th>
             <td><a th:text="${board.title}" th:href="@{/board/{id}(id=${board.id})}" /></td>
 <!--            <td><a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="btn btn-danger">삭제하기</a></td>-->
 <!--            <td><a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-warning">업데이트</a></td>-->

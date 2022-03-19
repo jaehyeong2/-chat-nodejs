@@ -1,6 +1,9 @@
 package jjfactory.pet.service.comment;
 
+import jjfactory.pet.domain.board.Board;
 import jjfactory.pet.domain.comment.Comment;
+import jjfactory.pet.domain.user.User;
+import jjfactory.pet.repository.board.BoardRepository;
 import jjfactory.pet.repository.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +19,7 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
+    private final BoardRepository boardRepository;
 
     @Override
     public Comment getComment(Long id){
@@ -33,7 +37,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void save(Comment comment){
+    public void save(Comment comment, User user, Long boardId){
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+            return new IllegalArgumentException("게시글 조회실패");
+        });
+
+        log.info("user = {} , board = {}",user.getId(),board.getId());
+
+        comment.setUser(user);
+        comment.setBoard(board);
         commentRepository.save(comment);
     }
 

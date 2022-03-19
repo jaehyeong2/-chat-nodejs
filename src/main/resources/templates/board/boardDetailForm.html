@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h3>글</h3>
+        <form th:object="${board}">
+            <div>
+                <div th:text="${board.title}"/>
+            </div>
+            <div>
+                <textarea th:text="${board.content}"/>
+            </div>
+        </form>
+
+
+    </div>
+</body>
+</html>

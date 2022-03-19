@@ -4,6 +4,7 @@ import jjfactory.pet.domain.BaseTimeEntity;
 import jjfactory.pet.domain.board.Board;
 import jjfactory.pet.domain.user.User;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Comment extends BaseTimeEntity {
 
     @Id @GeneratedValue

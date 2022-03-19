@@ -1,6 +1,6 @@
 package jjfactory.pet.domain.user;
 
-import jjfactory.pet.domain.Role;
+import jjfactory.pet.domain.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id @Column(name = "user_id")
     @GeneratedValue

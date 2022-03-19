@@ -1,4 +1,4 @@
-package jjfactory.pet.config;
+package jjfactory.pet.config.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,5 +17,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.authorizeHttpRequests()
+                .antMatchers("/board", "/user/**").authenticated()
+                .anyRequest().permitAll()
+                .and().formLogin().loginPage("/signin")
+                .loginProcessingUrl("/signin")
+                .defaultSuccessUrl("/");
     }
 }

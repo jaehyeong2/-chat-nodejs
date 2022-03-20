@@ -96,13 +96,18 @@ let index = {
     },
 
     commentDelete : function(boardId, commentId){
+        let data = {
+            boardId: $("#boardId").val(),
+            commentId: $("#commentId").val()
+        };
         $.ajax({
             type: "DELETE",
-            url: `/api/comment/${commentId}`,
+            url: `/comment/${data.commentId}`,
+            data: JSON.stringify(data),
             dataType: "json"
         }).done(function(resp){
             alert("댓글삭제가 완료되었습니다");
-            location.href = `/board/${boardId}`;
+            location.href = `/board/${data.boardId}`;
         }).fail(function(error){
             alert(JSON.stringify(error));
         });

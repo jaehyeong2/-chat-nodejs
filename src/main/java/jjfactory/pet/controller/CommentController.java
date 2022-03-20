@@ -30,6 +30,6 @@ public class CommentController {
     @DeleteMapping("/comment/{id}")
     public CommonRes<?> delete(@PathVariable Long id){
         commentService.delete(id);
-        return new CommonRes<>(HttpStatus.OK.value(),null);
+        return new CommonRes<>(HttpStatus.OK.value(),"삭제완료");
     }
 }

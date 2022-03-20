@@ -22,9 +22,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User join(User user) {
-        User save = userRepository.save(user);
+//        boolean check = duplicateCheck(user.getUsername());
 
-        //비밀번호 해싱
+         User save = userRepository.save(user);
+
         String rawPassword = save.getPassword();
         String encoded = encoder.encode(rawPassword);
         save.hashingPassword(encoded);
@@ -49,5 +50,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return null;
+    }
+
+    public boolean duplicateCheck(String name){
+        User user = userRepository.findByUsername(name);
+        if(user != null){
+            throw  new IllegalArgumentException("중복된 회원입니다");
+        }
+        return true;
     }
 }
